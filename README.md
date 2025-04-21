@@ -162,7 +162,7 @@ You can test your IRC server using:
 
 ## 👤 Authors
 
-- Your Name (@yourusername)
+- Oussama Zahdi (@Oussamazahdi)
 - Teammate Name (@teammateusername) - If applicable
 
 ## 💬 Acknowledgements
