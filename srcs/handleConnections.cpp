@@ -39,7 +39,6 @@ void Server::handleClientMessage(int clientFd)
 
 	memset(buffer, 0, 1024);
 	BytesRead = recv(clientFd, buffer, sizeof(buffer) - 1, MSG_DONTWAIT);
-	// std::cout << "buffer : " << buffer << std::endl;
 	if (BytesRead == 0)
 		this->handleClientDisconnect(clientFd);
 	else if (BytesRead < 0)
@@ -82,5 +81,5 @@ void	Server::removeClient(int clientFd)
 void Server::handleClientDisconnect(int clientFd)
 {
 	this->removeClient(clientFd);
-	std::cout << "Client " << clientFd << " disconnected" << std::endl; // u can add this to client destructor
+	std::cout << "Client " << clientFd << " disconnected" << std::endl;
 }

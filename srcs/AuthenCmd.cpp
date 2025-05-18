@@ -43,14 +43,6 @@ void	Server::ParseCommand(Client* client, std::string const & line)
 		this->handlePingPong(client, params);
 	else if (Command == "PRIVMSG")
 		this->handlePrivMsg(client, params);
-	// else
-	// {
-	// 	if (!client->registered)
-	// 	{
-	// 		this->sendToClient(client, "[451]: You have not registered");
-	// 		return ;
-	// 	}
-	// }
 }
 
 int Server::handlePass(Client* client, const std::vector<std::string>& params)
@@ -142,13 +134,6 @@ int Server::handlePrivMsg(Client* client, const std::vector<std::string>& params
 
 	return 0;
 }
-
-// void Server::sendToClient(Client* client, const std::string& message)
-// {
-//	 // Standard format is ":servername message\r\n"
-//	 std::string fullMessage = ":" + std::string("ircserv") + " " + message + "\r\n";
-//	 send(client->Clientfd, fullMessage.c_str(), fullMessage.length(), 0);
-// }
 
 void Server::sendToClient(Client* client, const std::string& message)
 {

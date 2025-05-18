@@ -55,7 +55,6 @@ class Server
 		void	removeClient(int ClientFd);
 		void	sendToClient(Client* client, const std::string& message);
 		void	checkRegistration(Client* client);
-		// static void	SignalsHandler(int sig);
 		void	ClearAll();
 
 		/*---- Utiles method's ----*/

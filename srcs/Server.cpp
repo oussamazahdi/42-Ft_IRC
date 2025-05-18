@@ -1,10 +1,6 @@
 #include "../includes/Server.hpp"
 
-bool Server::signals = false;
-
-/*---------------------- Canonical orthodox form ----------------------*/
 Server::Server(int _fd, int _Port) : SerSockFd(_fd), Port(_Port) {
-	// this->signals = false;
 }
 Server::~Server() {}
 Server::Server(Server const & src)
@@ -18,7 +14,6 @@ Server & Server::operator=(Server const & src)
 	return *this;
 }
 
-/*---------------------- Seter's and geter's ----------------------*/
 void	Server::set_SerSockFd(int fd) {
 	this->SerSockFd = fd;
 }
@@ -35,13 +30,11 @@ int	Server::get_Port() const {
 	return (this->Port);
 }
 
-/*---------------------- Server method's ----------------------*/
-
 void Server::Start_Server()
 {
 	try {
 		this->Build_Server();
-		while (Server::signals == false)
+		while (true)
 		{
 			if (poll(this->polling.data(), this->polling.size(), -1) == -1)
 			throw std::runtime_error( "Error: Failed to monitor file descriptors using poll()");
@@ -71,7 +64,7 @@ void Server::Build_Server()
 	struct sockaddr_in addr;
 	struct pollfd poller;
 
-	this->SerSockFd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0); // check if multy flaging is forb
+	this->SerSockFd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
 	if (this->SerSockFd == -1)
 		throw std::runtime_error( "Error: Failed to create socket using socket()");
 
@@ -113,8 +106,6 @@ std::vector<std::string> Server::splitBySpaces(const std::string& middle)
 
     return (params);
 }
-
-
 
 void Server::ClearAll()
 {
