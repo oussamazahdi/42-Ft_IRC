@@ -132,8 +132,8 @@ irssi -c localhost -p 6667 -w secretpassword
 │   │   ├── privmsg.cpp
 │   │   └── ...
 │   └── utils/
-│       ├── Parser.cpp
-│       └── ...
+│	   ├── Parser.cpp
+│	   └── ...
 └── README.md
 ```
 
@@ -163,7 +163,8 @@ You can test your IRC server using:
 ## 👤 Authors
 
 - Oussama Zahdi (@Oussamazahdi)
-- Teammate Name (@teammateusername) - If applicable
+- Kemal El Alami (@KamalElAlami)
+- Soufiane Arif (@Soufiixarif)
 
 ## 💬 Acknowledgements
 
