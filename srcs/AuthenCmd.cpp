@@ -33,12 +33,6 @@ void	Server::ParseCommand(Client* client, std::string const & line)
 			params = this->splitBySpaces(middle);
 		}
 	}
-	// std::cout << "Commend : " << Command << std::endl;
-	// for (size_t i = 0; i < params.size(); i++)
-	// {
-	// 	std::cout << "param[" << i << "] : " << params[i] << std::endl;
-	// }
-	
 	if (Command == "PASS")
 		this->handlePass(client, params);
 	else if (Command == "NICK")
@@ -116,8 +110,13 @@ int	Server::handleUser(Client* client, const std::vector<std::string>& params)
 
 int	Server::handlePingPong(Client* client, const std::vector<std::string>& params)
 {
-	(void) params;
-	this->sendToClient(client, "\r\n");
+	std::string parameter;
+	if (params.size() > 1)
+		parameter = params[1];
+	else
+		parameter = "ircserv";
+	std::string FullMsg = ":ircserv PONG :" + parameter + "\r\n";
+	send(client->Clientfd, FullMsg.c_str(), FullMsg.length(), 0);
 	return 0;
 }
 

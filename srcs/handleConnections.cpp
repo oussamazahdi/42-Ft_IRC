@@ -12,7 +12,7 @@ void Server::handleNewConnection()
 		throw std::runtime_error( "Error: Failed to accept new connection using accept()");
 
 	_client.address = inet_ntoa(addr.sin_addr);
-	Client *tmp = new Client(_client); // We should should delet it
+	Client *tmp = new Client(_client);
 	this->clients.push_back(tmp);
 	client_pollfd.fd = _client.Clientfd;
 	client_pollfd.events = POLLIN;
@@ -39,7 +39,7 @@ void Server::handleClientMessage(int clientFd)
 
 	memset(buffer, 0, 1024);
 	BytesRead = recv(clientFd, buffer, sizeof(buffer) - 1, MSG_DONTWAIT);
-	std::cout << "buffer : " << buffer << std::endl;
+	// std::cout << "buffer : " << buffer << std::endl;
 	if (BytesRead == 0)
 		this->handleClientDisconnect(clientFd);
 	else if (BytesRead < 0)
