@@ -56,7 +56,7 @@ class Server
 		void	sendToClient(Client* client, const std::string& message);
 		void	checkRegistration(Client* client);
 		void	ClearAll();
-
+		int		handleCap(Client* client, const std::vector<std::string>& params);
 		/*---- Utiles method's ----*/
 		std::vector<std::string> splitBySpaces(const std::string& middle);
 

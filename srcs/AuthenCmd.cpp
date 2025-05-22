@@ -35,6 +35,8 @@ void	Server::ParseCommand(Client* client, std::string const & line)
 	}
 	if (Command == "PASS")
 		this->handlePass(client, params);
+	else if (Command == "CAP")
+		this->handleCap(client, params);
 	else if (Command == "NICK")
 		this->handleNick(client, params);
 	else if (Command == "USER")
