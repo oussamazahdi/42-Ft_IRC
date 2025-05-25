@@ -10,10 +10,11 @@
 #include <string>
 #include <poll.h>
 #include <vector>
-
+#include <cerrno>
 #include <cstring>
 #include <signal.h>
 #include <unistd.h>
+#include "./Channels.hpp"
 
 
 class Server
@@ -25,6 +26,7 @@ class Server
 		std::string						Password;
 		std::vector <Client*>			clients;
 		std::vector <struct pollfd>		polling;
+		std::vector <Channel*>			chanPool;
 
 	public:
 		/*---- Canonical orthodox form ----*/
@@ -51,7 +53,9 @@ class Server
 		int		handleNick(Client* client, const std::vector<std::string>& params);
 		int		handleUser(Client* client, const std::vector<std::string>& params);
 		int		handlePingPong(Client* client, const std::vector<std::string>& params);
-		int		handlePrivMsg(Client* client, const std::vector<std::string>& params); //
+		int		handlePrivMsg(Client* client, const std::vector<std::string>& params);
+		// int		handleTopic(Client* client, const std::vector<std::string>& params);
+		int		handleJoin(Client* client, const std::vector<std::string>& params);
 		void	removeClient(int ClientFd);
 		void	sendToClient(Client* client, const std::string& message);
 		void	checkRegistration(Client* client);
@@ -59,6 +63,10 @@ class Server
 		int		handleCap(Client* client, const std::vector<std::string>& params);
 		/*---- Utiles method's ----*/
 		std::vector<std::string> splitBySpaces(const std::string& middle);
+		bool isChannelExist(std::string chanName);
+		void broadcastInChannel(std::vector <Client *> members, std::string message);
+		int findChannel(std::string name);
+		int findUser(std::string name);
 
 };
 
